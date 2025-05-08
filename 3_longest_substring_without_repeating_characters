@@ -1,0 +1,27 @@
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        if not s:
+            return 0
+            
+        char_set = set()
+        longest = 0
+        l = 0
+        
+        for r in range(len(s)):
+            # If character is already in our set, remove characters from the left
+            # until we remove the duplicate
+            while s[r] in char_set:
+                char_set.remove(s[l])
+                l += 1
+                
+            # Add current character to the set
+            char_set.add(s[r])
+            
+            # Update longest substring length
+            longest = max(longest, r - l + 1)
+            
+        return longest
+    
+class Main:
+    sol = Solution()
+    print(sol.lengthOfLongestSubstring('abc'))
